@@ -1,98 +1,126 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button.jsx'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
-import { Input } from '@/components/ui/input.jsx'
-import { Label } from '@/components/ui/label.jsx'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select.jsx'
-import { Textarea } from '@/components/ui/textarea.jsx'
-import { X, Upload, CheckCircle } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from "react";
+import { Button } from "@/components/ui/button.jsx";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card.jsx";
+import { Input } from "@/components/ui/input.jsx";
+import { Label } from "@/components/ui/label.jsx";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select.jsx";
+import { X, Upload, CheckCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import { Map } from "./Map.jsx";
 
-const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => {
+const AgentRegistrationModal = ({
+  isOpen,
+  onClose,
+  translations,
+  language,
+}) => {
   const [formData, setFormData] = useState({
-    agentType: '',
-    agentName: '',
-    location: '',
-    email: '',
-    document: null
-  })
-  const [errors, setErrors] = useState({})
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+    lat: 33.5138,
+    lng: 36.2765,
+    agentFirstName: "",
+    agentLastName: "",
+    agentType: "",
+    email: "",
+    document: null,
+  });
 
-  const t = translations
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+
+  const t = translations;
 
   const validateForm = () => {
-    const newErrors = {}
-    
-    if (!formData.agentType) {
-      newErrors.agentType = t.pleaseSelectAgentType
-    }
-    if (!formData.agentName.trim()) {
-      newErrors.agentName = t.pleaseEnterAgentName
-    }
-    if (!formData.location.trim()) {
-      newErrors.location = t.pleaseEnterLocation
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = t.pleaseEnterValidEmail
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = t.pleaseEnterValidEmail
-    }
-    if (!formData.document) {
-      newErrors.document = t.pleaseUploadDocument
-    }
+    const newErrors = {};
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    if (!formData.agentType) newErrors.agentType = t.pleaseSelectAgentType;
+    if (!formData.agentFirstName.trim())
+      newErrors.agentFirstName =
+        language === "ar"
+          ? "يرجى إدخال الاسم الأول"
+          : "Please enter first name";
+    if (!formData.agentLastName.trim())
+      newErrors.agentLastName =
+        language === "ar"
+          ? "يرجى إدخال الاسم الأخير"
+          : "Please enter last name";
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = t.pleaseEnterValidEmail;
+    if (!formData.document) newErrors.document = t.pleaseUploadDocument;
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    
-    if (!validateForm()) {
-      return
-    }
+    e.preventDefault();
+    if (!validateForm()) return;
+    setIsSubmitting(true);
+    try {
+      const data = new FormData();
+      data.append("first_name", formData.agentFirstName);
+      data.append("last_name", formData.agentLastName);
+      data.append("latitude", formData.lat);
+      data.append("longitude", formData.lng);
+      data.append("agent_type", formData.agentType);
+      data.append("email", formData.email);
+      if (formData.document) data.append("proof_document", formData.document);
+      // ✅ API POST request
+      await axios.post("/api/subscibers/register", data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    setIsSubmitting(true)
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      
-      // Reset form after 3 seconds and close modal
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
       setTimeout(() => {
-        setIsSubmitted(false)
+        setIsSubmitted(false);
         setFormData({
-          agentType: '',
-          agentName: '',
-          location: '',
-          email: '',
-          document: null
-        })
-        setErrors({})
-        onClose()
-      }, 3000)
-    }, 2000)
-  }
+          lat: 33.5138,
+          lng: 36.2765,
+          agentFirstName: "",
+          agentLastName: "",
+          agentType: "",
+          email: "",
+          document: null,
+        });
+        setErrors({});
+        onClose();
+      }, 3000);
+    } catch (error) {
+      console.error(error);
+      setIsSubmitting(false);
+    }
+  };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      setFormData({ ...formData, document: file })
-      setErrors({ ...errors, document: '' })
+      setFormData({ ...formData, document: file });
+      setErrors({ ...errors, document: "" });
     }
-  }
+  };
 
   const handleInputChange = (field, value) => {
-    setFormData({ ...formData, [field]: value })
-    if (errors[field]) {
-      setErrors({ ...errors, [field]: '' })
-    }
-  }
+    setFormData({ ...formData, [field]: value });
+    if (errors[field]) setErrors({ ...errors, [field]: "" });
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <AnimatePresence>
@@ -125,27 +153,24 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
                 {t.agentRegistration}
               </CardTitle>
               <CardDescription className="text-center">
-                {language === 'ar' 
-                  ? 'املأ البيانات التالية لتسجيل حسابك كوسيط عقاري'
-                  : 'Fill in the following information to register as a real estate agent'
-                }
+                {language === "ar"
+                  ? "املأ البيانات التالية لتسجيل حسابك كوسيط عقاري"
+                  : "Fill in the following information to register as a real estate agent"}
               </CardDescription>
             </CardHeader>
             <CardContent>
               {isSubmitted ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-8"
-                >
+                <div className="text-center py-8">
                   <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-green-600 mb-2">
-                    {language === 'ar' ? 'تم الإرسال بنجاح!' : 'Successfully Submitted!'}
+                    {language === "ar"
+                      ? "تم الإرسال بنجاح!"
+                      : "Successfully Submitted!"}
                   </h3>
                   <p className="text-muted-foreground">
                     {t.requestSubmittedSuccessfully}
                   </p>
-                </motion.div>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Agent Type */}
@@ -153,14 +178,18 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
                     <Label htmlFor="agentType">{t.agentType}</Label>
                     <Select
                       value={formData.agentType}
-                      onValueChange={(value) => handleInputChange('agentType', value)}
+                      onValueChange={(v) => handleInputChange("agentType", v)}
                     >
-                      <SelectTrigger className={errors.agentType ? 'border-red-500' : ''}>
+                      <SelectTrigger
+                        className={errors.agentType ? "border-red-500" : ""}
+                      >
                         <SelectValue placeholder={t.pleaseSelectAgentType} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="office">{t.office}</SelectItem>
-                        <SelectItem value="serviceProvider">{t.serviceProvider}</SelectItem>
+                        <SelectItem value="مكتب وسيط">{t.office}</SelectItem>
+                        <SelectItem value="مزود خدمة">
+                          {t.serviceProvider}
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     {errors.agentType && (
@@ -168,35 +197,48 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
                     )}
                   </div>
 
-                  {/* Agent Name */}
+                  {/* Name Fields */}
                   <div className="space-y-2">
-                    <Label htmlFor="agentName">{t.agentName}</Label>
+                    <Label htmlFor="agentFirstName">اسم الوسيط</Label>
                     <Input
-                      id="agentName"
-                      type="text"
-                      value={formData.agentName}
-                      onChange={(e) => handleInputChange('agentName', e.target.value)}
-                      className={errors.agentName ? 'border-red-500' : ''}
-                      placeholder={t.pleaseEnterAgentName}
+                      id="agentFirstName"
+                      value={formData.agentFirstName}
+                      onChange={(e) =>
+                        handleInputChange("agentFirstName", e.target.value)
+                      }
+                      className={errors.agentFirstName ? "border-red-500" : ""}
+                      placeholder={
+                        language === "ar"
+                          ? "أدخل الاسم الأول"
+                          : "Enter first name"
+                      }
                     />
-                    {errors.agentName && (
-                      <p className="text-sm text-red-500">{errors.agentName}</p>
+                    {errors.agentFirstName && (
+                      <p className="text-sm text-red-500">
+                        {errors.agentFirstName}
+                      </p>
                     )}
                   </div>
 
-                  {/* Location */}
                   <div className="space-y-2">
-                    <Label htmlFor="location">{t.location}</Label>
+                    <Label htmlFor="agentLastName">الكنية</Label>
                     <Input
-                      id="location"
-                      type="text"
-                      value={formData.location}
-                      onChange={(e) => handleInputChange('location', e.target.value)}
-                      className={errors.location ? 'border-red-500' : ''}
-                      placeholder={t.pleaseEnterLocation}
+                      id="agentLastName"
+                      value={formData.agentLastName}
+                      onChange={(e) =>
+                        handleInputChange("agentLastName", e.target.value)
+                      }
+                      className={errors.agentLastName ? "border-red-500" : ""}
+                      placeholder={
+                        language === "ar"
+                          ? "أدخل الاسم الأخير"
+                          : "Enter last name"
+                      }
                     />
-                    {errors.location && (
-                      <p className="text-sm text-red-500">{errors.location}</p>
+                    {errors.agentLastName && (
+                      <p className="text-sm text-red-500">
+                        {errors.agentLastName}
+                      </p>
                     )}
                   </div>
 
@@ -207,12 +249,65 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
                       id="email"
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={errors.email ? 'border-red-500' : ''}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                      className={errors.email ? "border-red-500" : ""}
                       placeholder={t.pleaseEnterValidEmail}
                     />
                     {errors.email && (
                       <p className="text-sm text-red-500">{errors.email}</p>
+                    )}
+                  </div>
+
+                  {/* Location Button */}
+                  <div>
+                    <Button
+                      type="button"
+                      className="flex-1 bg-sky-600 hover:bg-sky-700"
+                      onClick={() => setShowMap(true)}
+                    >
+                      تحديد الموقع
+                    </Button>
+
+                    {formData.lat && formData.lng && (
+                      <p className="text-sm text-green-600 mt-2">
+                        📍{" "}
+                        {language === "ar"
+                          ? "الموقع الحالي:"
+                          : "Selected Location:"}
+                        {` (${formData.lat.toFixed(5)}, ${formData.lng.toFixed(
+                          5
+                        )})`}
+                      </p>
+                    )}
+
+                    {showMap && (
+                      <Map
+                        onClose={() => setShowMap(false)}
+                        onSelect={(coordinates) => {
+                          setFormData({
+                            ...formData,
+                            lat: coordinates.lat,
+                            lng: coordinates.lng,
+                          });
+                          setShowMap(false);
+                        }}
+                        {...(formData.lat && formData.lng
+                          ? {
+                              center: { lat: formData.lat, lng: formData.lng },
+                              markers: [
+                                {
+                                  location: {
+                                    lat: formData.lat,
+                                    lng: formData.lng,
+                                  },
+                                  name: "الموقع الحالي",
+                                },
+                              ],
+                            }
+                          : { zoom: 10 })}
+                      />
                     )}
                   </div>
 
@@ -224,14 +319,17 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
                         id="document"
                         type="file"
                         onChange={handleFileChange}
-                        className={`${errors.document ? 'border-red-500' : ''} file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100`}
+                        className={`${
+                          errors.document ? "border-red-500" : ""
+                        } file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100`}
                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                       />
                       <Upload className="absolute right-3 top-3 w-4 h-4 text-muted-foreground pointer-events-none" />
                     </div>
                     {formData.document && (
                       <p className="text-sm text-green-600">
-                        {language === 'ar' ? 'تم رفع الملف:' : 'File uploaded:'} {formData.document.name}
+                        {language === "ar" ? "تم رفع الملف:" : "File uploaded:"}{" "}
+                        {formData.document.name}
                       </p>
                     )}
                     {errors.document && (
@@ -255,14 +353,13 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
                       className="flex-1 bg-sky-600 hover:bg-sky-700"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting ? (
-                        <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          {language === 'ar' ? 'جاري الإرسال...' : 'Submitting...'}
-                        </div>
-                      ) : (
-                        t.submitRequest
-                      )}
+                      {isSubmitting
+                        ? `${
+                            language === "ar"
+                              ? "جاري الإرسال..."
+                              : "Submitting..."
+                          }`
+                        : t.submitRequest}
                     </Button>
                   </div>
                 </form>
@@ -272,8 +369,7 @@ const AgentRegistrationModal = ({ isOpen, onClose, translations, language }) => 
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default AgentRegistrationModal
-
+export default AgentRegistrationModal;
