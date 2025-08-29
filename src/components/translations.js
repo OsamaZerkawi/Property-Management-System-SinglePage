@@ -6,19 +6,20 @@ export const translations = {
     darkMode: "الوضع الليلي",
     lightMode: "الوضع النهاري",
     language: "اللغة",
-    
+
     // Navigation
     navHome: "الرئيسية",
     navServices: "الخدمات",
     navOffices: "المكاتب العقارية",
     navContact: "اتصل بنا",
-    
+
     // Hero Section
     heroTitle: "خدمات العقارات السياحية والسكنية",
-    heroSubtitle: "نحن نقدم أفضل خدمات بيع وتأجير العقارات السياحية والسكنية مع فريق من الخبراء المتخصصين",
+    heroSubtitle:
+      "نحن نقدم أفضل خدمات بيع وتأجير العقارات السياحية والسكنية مع فريق من الخبراء المتخصصين",
     exploreProperties: "استكشف العقارات",
     contactUs: "تواصل معنا",
-    
+
     // Services Section
     servicesTitle: "خدماتنا",
     servicesSubtitle: "نقدم مجموعة شاملة من الخدمات العقارية",
@@ -28,9 +29,9 @@ export const translations = {
     residentialPropertiesDesc: "شقق وفلل سكنية بمواصفات عالية الجودة",
     propertyManagement: "إدارة العقارات",
     propertyManagementDesc: "خدمات إدارة شاملة لعقاراتك",
-    consultation: "الاستشارات العقارية",
-    consultationDesc: "استشارات متخصصة لاتخاذ القرار الأمثل",
-    
+    consultation: "مزودين خدمات",
+    consultationDesc: "خدمات متنوعة مثل التصوير، الدهان والصيانة",
+
     // Top Offices Section
     topOfficesTitle: "أفضل 5 مكاتب عقارية",
     topOfficesSubtitle: "شركاؤنا المتميزون في مجال العقارات",
@@ -44,7 +45,7 @@ export const translations = {
     office4Desc: "حلول عقارية مبتكرة ومتطورة",
     office5Name: "مكتب الثقة للعقارات",
     office5Desc: "الشفافية والمصداقية في كل معاملة",
-    
+
     // Footer
     footerTitle: "منصة العقارات",
     footerDesc: "شريكك الموثوق في عالم العقارات",
@@ -55,7 +56,7 @@ export const translations = {
     contact: "اتصل بنا",
     followUs: "تابعنا",
     allRightsReserved: "جميع الحقوق محفوظة",
-    
+
     // Agent Registration Form
     agentRegistration: "تسجيل الوسيط",
     agentType: "نوع الوسيط",
@@ -73,8 +74,42 @@ export const translations = {
     pleaseEnterLocation: "يرجى إدخال الموقع",
     pleaseEnterValidEmail: "يرجى إدخال بريد إلكتروني صحيح",
     pleaseUploadDocument: "يرجى رفع وثيقة الإثبات",
-    requestSubmittedSuccessfully: "تم إرسال الطلب بنجاح! سيتم مراجعته والرد عليك قريباً.",
-    downloadMobileApp: "تحميل تطبيق الجوال"
+    requestSubmittedSuccessfully:
+      "تم إرسال الطلب بنجاح! سيتم مراجعته والرد عليك قريباً.",
+    downloadMobileApp: "تحميل تطبيق الجوال",
+
+    //Top Properties
+    topPropertiesTitle: "أفضل العقارات",
+    topPropertiesSubtitle: "استكشف عقاراتنا الموجودة حول العالم",
+
+    //Team
+    teamTitle: "فريقنا",
+    teamSubtitle: "المحترفون الذين يجعلون أحلامك تتحقق",
+    abdullah: {
+      role: "مهندس قواعد بيانات وBackend",
+      bio: "يصمّم ويُحسّن قواعد البيانات العلائقية وNoSQL، ويضمن تدفق بيانات سلس وأداء عالي لتطبيقات الخادم باستخدام Laravel وNestJS.",
+      facebook: "https://www.facebook.com/abdullah",
+    },
+    hasan: {
+      role: "طوّر Backend (Laravel وNestJS)",
+      bio: "يقوم بتطوير أنظمة خلفية قوية وواجهات برمجة التطبيقات REST، ودمج قواعد البيانات لضمان تطبيقات قابلة للتوسع وفعّالة.",
+      facebook: "https://www.facebook.com/hasan",
+    },
+    kareem: {
+      role: "مطور Full Stack (React & Laravel)",
+      bio: "خبير في تطوير APIs متكاملة باستخدام Laravel وواجهات ديناميكية باستخدام React.",
+      facebook: "https://www.facebook.com/kareem",
+    },
+    mohammad: {
+      role: "مصمم UI/UX و مطوّر تطبيقات الهاتف",
+      bio: "يجمع بين مهارات التصميم الإبداعي وتطوير تطبيقات الهاتف لتقديم تطبيقات جميلة وعملية.",
+      facebook: "https://www.facebook.com/mohammad",
+    },
+    osama: {
+      role: "مطوّر Flutter و React",
+      bio: "بناء تطبيقات متعددة المنصات باستخدام Flutter ودمج حلول الويب الحديثة مع React.",
+      facebook: "https://www.facebook.com/osama",
+    },
   },
   en: {
     // Header
@@ -83,19 +118,20 @@ export const translations = {
     darkMode: "Dark Mode",
     lightMode: "Light Mode",
     language: "Language",
-    
+
     // Navigation
     navHome: "Home",
     navServices: "Services",
     navOffices: "Offices",
     navContact: "Contact",
-    
+
     // Hero Section
     heroTitle: "Tourist & Residential Real Estate Services",
-    heroSubtitle: "We provide the best tourist and residential real estate sales and rental services with a team of specialized experts",
+    heroSubtitle:
+      "We provide the best tourist and residential real estate sales and rental services with a team of specialized experts",
     exploreProperties: "Explore Properties",
     contactUs: "Contact Us",
-    
+
     // Services Section
     servicesTitle: "Our Services",
     servicesSubtitle: "We offer a comprehensive range of real estate services",
@@ -104,10 +140,12 @@ export const translations = {
     residentialProperties: "Residential Properties",
     residentialPropertiesDesc: "High-quality apartments and villas",
     propertyManagement: "Property Management",
-    propertyManagementDesc: "Comprehensive management services for your properties",
-    consultation: "Real Estate Consultation",
-    consultationDesc: "Specialized consultations for optimal decision making",
-    
+    propertyManagementDesc:
+      "Comprehensive management services for your properties",
+    consultation: "Service Provider",
+    consultationDesc:
+      "Various services like photography, painting, and maintenance",
+
     // Top Offices Section
     topOfficesTitle: "Top 5 Real Estate Offices",
     topOfficesSubtitle: "Our distinguished partners in real estate",
@@ -121,7 +159,7 @@ export const translations = {
     office4Desc: "Innovative and advanced real estate solutions",
     office5Name: "Trust Real Estate Office",
     office5Desc: "Transparency and credibility in every transaction",
-    
+
     // Footer
     footerTitle: "Real Estate Platform",
     footerDesc: "Your trusted partner in the world of real estate",
@@ -132,7 +170,7 @@ export const translations = {
     contact: "Contact",
     followUs: "Follow Us",
     allRightsReserved: "All Rights Reserved",
-    
+
     // Agent Registration Form
     agentRegistration: "Agent Registration",
     agentType: "Agent Type",
@@ -150,8 +188,43 @@ export const translations = {
     pleaseEnterLocation: "Please enter location",
     pleaseEnterValidEmail: "Please enter a valid email",
     pleaseUploadDocument: "Please upload proof document",
-    requestSubmittedSuccessfully: "Request submitted successfully! It will be reviewed and we'll get back to you soon.",
-    downloadMobileApp: "Download Mobile App"
-  }
-};
+    requestSubmittedSuccessfully:
+      "Request submitted successfully! It will be reviewed and we'll get back to you soon.",
+    downloadMobileApp: "Download Mobile App",
 
+    //Top Properties
+    topPropertiesTitle: "Top Properties",
+    topPropertiesSubtitle: "Discover our properties around the world",
+
+    //Team
+    teamTitle: "Our Team",
+    teamSubtitle: "The professionals who make your dreams come true",
+
+    abdullah: {
+      role: "Database & Backend Engineer",
+      bio: "Designs and optimizes relational and NoSQL databases, ensuring seamless data flow and high-performance server-side applications using Laravel and NestJS.",
+      facebook: "https://www.facebook.com/abdullah",
+    },
+    hasan: {
+      role: "Backend Developer (Laravel & NestJS)",
+      bio: "Develops robust backend systems, RESTful APIs, and integrates databases to ensure scalable and efficient applications.",
+      facebook: "https://www.facebook.com/hasan",
+    },
+    kareem: {
+      role: "Full Stack Developer (React & Laravel)",
+      bio: "Expert in developing scalable backend APIs with Laravel and dynamic frontend interfaces with React.",
+      facebook: "https://www.facebook.com/kareem",
+    },
+    mohammad: {
+      role: "UI/UX & Mobile Developer",
+      bio: "Combines creative design skills with mobile app development to deliver beautiful and functional apps.",
+      facebook: "https://www.facebook.com/mohammad",
+    },
+    osama: {
+      role: "Flutter Developer & React Enthusiast",
+      bio: "Builds cross-platform mobile applications with Flutter and integrates modern web solutions using React.",
+
+      facebook: "https://www.facebook.com/osama",
+    },
+  },
+};

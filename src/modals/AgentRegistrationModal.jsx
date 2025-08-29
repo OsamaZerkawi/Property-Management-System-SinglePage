@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { registerSubscriber } from "../api/api_repo.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import {
   Card,
@@ -18,8 +19,7 @@ import {
 } from "@/components/ui/select.jsx";
 import { X, Upload, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
-import { Map } from "./Map.jsx";
+import { Map } from "../components/Map.jsx";
 
 const AgentRegistrationModal = ({
   isOpen,
@@ -70,6 +70,7 @@ const AgentRegistrationModal = ({
     e.preventDefault();
     if (!validateForm()) return;
     setIsSubmitting(true);
+
     try {
       const data = new FormData();
       data.append("first_name", formData.agentFirstName);
@@ -79,10 +80,8 @@ const AgentRegistrationModal = ({
       data.append("agent_type", formData.agentType);
       data.append("email", formData.email);
       if (formData.document) data.append("proof_document", formData.document);
-      // ✅ API POST request
-      await axios.post("/api/subscibers/register", data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+
+      await registerSubscriber(data); // ✅ use API module
 
       setIsSubmitting(false);
       setIsSubmitted(true);

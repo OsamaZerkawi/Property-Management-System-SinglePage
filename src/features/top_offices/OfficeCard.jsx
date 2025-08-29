@@ -1,6 +1,6 @@
-import { BACKGROUND_COLORS, TEXT_COLORS } from "./components/colors";
-import locationIcon from "./assets/location.svg";
-import { formatPrice } from "./components/formatPrice";
+import { BACKGROUND_COLORS, TEXT_COLORS } from "../../components/colors";
+import locationIcon from "../../assets/location.svg";
+import { formatPrice } from "../../components/formatPrice";
 
 const PropertyCard = ({ property }) => {
   return (
