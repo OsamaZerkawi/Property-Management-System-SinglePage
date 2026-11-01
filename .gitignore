@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node modules
+node_modules/
+node_modules
+
+
+# Build output
+dist/
+dist-ssr/
+
+# Local environment files
+*.local
+.env
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Assets (optional: ignore if too large)
+# /assets/
+
+# Optional caches
+.cache/
+.vite/
+node_modules
