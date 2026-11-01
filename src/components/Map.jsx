@@ -6,6 +6,7 @@ import {
   Popup,
   useMap,
   useMapEvents,
+  ZoomControl,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -50,6 +51,7 @@ const FlyToLocation = ({ coords, setCoords }) => {
 };
 
 export const Map = ({
+  t,
   onClose,
   center = { lat: 33.5131, lng: 36.2913 },
   zoom = 18,
@@ -64,7 +66,7 @@ export const Map = ({
 
   const handleFindMe = () => {
     if (!navigator.geolocation) {
-      notifyError("المتصفح لا يدعم تحديد الموقع");
+      notifyError(t.mapGeolocationUnsupported);
       return;
     }
     if (flyCoords) {
@@ -78,7 +80,7 @@ export const Map = ({
         setMyLocation(coords);
         setFlyCoords(coords);
       },
-      () => notifyError("تعذر الحصول على موقعك")
+      () => notifyError(t.mapGeolocationFailed)
     );
   };
 
@@ -99,7 +101,7 @@ export const Map = ({
             borderRadius: "10px",
           }}
         >
-          إغلاق
+          {t.mapClose}
         </Button>
 
         {/* My Location Button */}
@@ -116,7 +118,7 @@ export const Map = ({
             borderRadius: "10px",
           }}
         >
-          {flyCoords ? "إلغاء تحديد موقعي" : "موقعي"}
+          {flyCoords ? t.mapCancelMyLocation : t.mapMyLocation}
         </Button>
 
         {/* My Select Location Button */}
@@ -127,7 +129,7 @@ export const Map = ({
           startIcon={<MapPinCheck size={18} />}
           onClick={() => {
             onSelect(selectedLocation);
-            notifySuccess("تم تأكيد الموقع");
+            notifySuccess(t.mapLocationConfirmed);
             onClose();
           }}
           sx={{
@@ -138,7 +140,7 @@ export const Map = ({
             borderRadius: "10px",
           }}
         >
-          تأكيد الموقع
+          {t.mapConfirmLocation}
         </Button>
 
         {/* Map */}
@@ -146,12 +148,15 @@ export const Map = ({
           center={center}
           zoom={zoom}
           scrollWheelZoom={scrollWheelZoom}
+          zoomControl={false}
           style={{ height: "100%", width: "100%" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+
+          <ZoomControl position="topright" />
 
           {/* Fly to location when set */}
           <FlyToLocation coords={flyCoords} setCoords={setFlyCoords} />
@@ -166,14 +171,14 @@ export const Map = ({
           {/* Selected location marker */}
           {selectedLocation && (
             <Marker position={selectedLocation} icon={selectedIcon}>
-              <Popup>الموقع الجديد</Popup>
+              <Popup>{t.mapNewLocation}</Popup>
             </Marker>
           )}
 
           {/* My location marker */}
           {myLocation && (
             <Marker position={myLocation} icon={myLocationIcon}>
-              <Popup>موقعي الحالي</Popup>
+              <Popup>{t.mapCurrentLocation}</Popup>
             </Marker>
           )}
 

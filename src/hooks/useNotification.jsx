@@ -1,7 +1,7 @@
 import { ToastContainer, toast, Slide } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
-const ToastComponent = () => (
+const ToastComponent = ({ rtl }) => (
   <ToastContainer
     className="select-none"
     position="top-right"
@@ -9,7 +9,7 @@ const ToastComponent = () => (
     hideProgressBar={false}
     newestOnTop={true}
     closeOnClick={false}
-    rtl={true}
+    rtl={rtl}
     pauseOnFocusLoss
     draggable
     pauseOnHover

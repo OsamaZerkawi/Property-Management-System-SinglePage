@@ -184,7 +184,7 @@ const AgentRegistrationModal = ({
 
                   {/* Name Fields */}
                   <div className="space-y-2">
-                    <Label htmlFor="agentFirstName">اسم الوسيط</Label>
+                    <Label htmlFor="agentFirstName">{t.firstName}</Label>
                     <Input
                       id="agentFirstName"
                       value={formData.agentFirstName}
@@ -206,7 +206,7 @@ const AgentRegistrationModal = ({
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="agentLastName">الكنية</Label>
+                    <Label htmlFor="agentLastName">{t.lastName}</Label>
                     <Input
                       id="agentLastName"
                       value={formData.agentLastName}
@@ -252,7 +252,7 @@ const AgentRegistrationModal = ({
                       className="flex-1 bg-sky-600 hover:bg-sky-700"
                       onClick={() => setShowMap(true)}
                     >
-                      تحديد الموقع
+                      {t.selectLocation}
                     </Button>
 
                     {formData.lat && formData.lng && (
@@ -269,6 +269,7 @@ const AgentRegistrationModal = ({
 
                     {showMap && (
                       <Map
+                        t={t}
                         onClose={() => setShowMap(false)}
                         onSelect={(coordinates) => {
                           setFormData({
@@ -287,7 +288,7 @@ const AgentRegistrationModal = ({
                                     lat: formData.lat,
                                     lng: formData.lng,
                                   },
-                                  name: "الموقع الحالي",
+                                  name: t.mapSavedLocation,
                                 },
                               ],
                             }

@@ -112,12 +112,12 @@ const TopOffices = ({ t }) => {
                   </div>
                 </div>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm text-sky-700">
+                  <CardTitle className="text-sm text-sky-700 dark:text-sky-300">
                     {office.name}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-1 text-sm text-gray-600">
+                  <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-300">
                     <MapPin className="w-4 h-4" />
                     <span>{office.location}</span>
                   </div>

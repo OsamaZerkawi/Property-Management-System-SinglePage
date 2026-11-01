@@ -30,7 +30,7 @@ This is a single-page React 19 and Vite site for a real estate platform ("Propol
 
 `src/components/translations.js` holds `ar` and `en` objects. Arabic is the default, and the page switches to RTL for it. `App.jsx` passes `t = translations[language]` to each section as a prop; the modal receives it as `translations`, along with `language`.
 
-New UI text needs a key in both languages. Some existing strings bypass this: modal name validation messages and field labels, and all text in `Map.jsx`, which is Arabic only.
+New UI text needs a key in both languages. A few strings in the agent modal bypass this with inline `language === "ar"` checks: name validation messages, name placeholders and the selected location label.
 
 ### Sample data
 
@@ -52,5 +52,4 @@ The site makes no API calls. `TopOffices` and `TopProperties` in `src/features/`
 ## Known issues
 
 - `src/components/ui/calendar.jsx` uses the react-day-picker v8 API (`IconLeft`, `IconRight`), but v9 is installed. Nothing imports it yet.
-- The buttons in `Map.jsx` sit on top of Leaflet's zoom control in the top-left corner.
 - `src/features/top_offices/OfficeCard.jsx` is not imported anywhere, and it is the only user of `colors.jsx` and `formatPrice.jsx`. The live offices UI is `TopOffices.jsx`.

@@ -41,7 +41,7 @@ function Hero({ t, backgroundY, textY }) {
           <Button
             size="lg"
             variant="outline"
-            className="border-sky-200 text-sky-700 hover:bg-sky-50"
+            className="border-sky-200 text-sky-700 hover:bg-sky-50 dark:text-sky-200"
             onClick={() => {
               const teamSection = document.getElementById("footer");
               teamSection?.scrollIntoView({ behavior: "smooth" });

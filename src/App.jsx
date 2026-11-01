@@ -138,7 +138,7 @@ function App() {
         language={language}
       />
 
-      <ToastComponent />
+      <ToastComponent rtl={language === "ar"} />
     </div>
   );
 }

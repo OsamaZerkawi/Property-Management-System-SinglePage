@@ -139,7 +139,7 @@ const TopProperties = ({ t }) => {
                 {/* Title */}
                 {property.postTitle && (
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm text-sky-700 line-clamp-1">
+                    <CardTitle className="text-sm text-sky-700 dark:text-sky-300 line-clamp-1">
                       {property.postTitle}
                     </CardTitle>
                   </CardHeader>
@@ -148,14 +148,14 @@ const TopProperties = ({ t }) => {
                 {/* Info */}
                 <CardContent>
                   {property.location && (
-                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                    <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-300">
                       <MapPin className="w-4 h-4" />
                       <span>{property.location}</span>
                     </div>
                   )}
 
                   {property.price && (
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-gray-500 dark:text-gray-300 mt-2">
                       💰 {property.price} {t?.currency || ""}
                       {property.rental_period && (
                         <span> / {property.rental_period}</span>
@@ -164,7 +164,7 @@ const TopProperties = ({ t }) => {
                   )}
 
                   {property.postDate && (
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                       📅 {property.postDate}
                     </p>
                   )}

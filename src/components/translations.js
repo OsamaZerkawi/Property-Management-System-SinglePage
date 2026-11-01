@@ -98,6 +98,21 @@ export const translations = {
     latakia: "اللاذقية",
     tartus: "طرطوس",
 
+    //Agent Form and Map
+    firstName: "اسم الوسيط",
+    lastName: "الكنية",
+    selectLocation: "تحديد الموقع",
+    mapClose: "إغلاق",
+    mapMyLocation: "موقعي",
+    mapCancelMyLocation: "إلغاء تحديد موقعي",
+    mapConfirmLocation: "تأكيد الموقع",
+    mapNewLocation: "الموقع الجديد",
+    mapCurrentLocation: "موقعي الحالي",
+    mapSavedLocation: "الموقع الحالي",
+    mapLocationConfirmed: "تم تأكيد الموقع",
+    mapGeolocationUnsupported: "المتصفح لا يدعم تحديد الموقع",
+    mapGeolocationFailed: "تعذر الحصول على موقعك",
+
     //Team
     teamTitle: "فريقنا",
     teamSubtitle: "المحترفون الذين يجعلون أحلامك تتحقق",
@@ -227,6 +242,21 @@ export const translations = {
     homs: "Homs",
     latakia: "Latakia",
     tartus: "Tartus",
+
+    //Agent Form and Map
+    firstName: "First Name",
+    lastName: "Last Name",
+    selectLocation: "Select Location",
+    mapClose: "Close",
+    mapMyLocation: "My Location",
+    mapCancelMyLocation: "Clear My Location",
+    mapConfirmLocation: "Confirm Location",
+    mapNewLocation: "New location",
+    mapCurrentLocation: "My current location",
+    mapSavedLocation: "Current location",
+    mapLocationConfirmed: "Location confirmed",
+    mapGeolocationUnsupported: "Your browser doesn't support location access",
+    mapGeolocationFailed: "Couldn't get your location",
 
     //Team
     teamTitle: "Our Team",
