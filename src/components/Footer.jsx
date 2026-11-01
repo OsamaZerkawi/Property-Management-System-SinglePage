@@ -80,7 +80,7 @@ function Footer({ t }) {
               </li>
               <li>
                 <a
-                  href="#about"
+                  href="#team"
                   className="text-sky-100 hover:text-white transition-colors"
                 >
                   {t.about}

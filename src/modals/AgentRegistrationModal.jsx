@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { registerSubscriber } from "../api/api_repo.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import {
   Card,
@@ -71,39 +70,26 @@ const AgentRegistrationModal = ({
     if (!validateForm()) return;
     setIsSubmitting(true);
 
-    try {
-      const data = new FormData();
-      data.append("first_name", formData.agentFirstName);
-      data.append("last_name", formData.agentLastName);
-      data.append("latitude", formData.lat);
-      data.append("longitude", formData.lng);
-      data.append("agent_type", formData.agentType);
-      data.append("email", formData.email);
-      if (formData.document) data.append("proof_document", formData.document);
+    // No backend: simulate the request, nothing is sent or stored
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
-      await registerSubscriber(data); // ✅ use API module
+    setIsSubmitting(false);
+    setIsSubmitted(true);
 
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          lat: 33.5138,
-          lng: 36.2765,
-          agentFirstName: "",
-          agentLastName: "",
-          agentType: "",
-          email: "",
-          document: null,
-        });
-        setErrors({});
-        onClose();
-      }, 3000);
-    } catch (error) {
-      console.error(error);
-      setIsSubmitting(false);
-    }
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        lat: 33.5138,
+        lng: 36.2765,
+        agentFirstName: "",
+        agentLastName: "",
+        agentType: "",
+        email: "",
+        document: null,
+      });
+      setErrors({});
+      onClose();
+    }, 3000);
   };
 
   const handleFileChange = (e) => {

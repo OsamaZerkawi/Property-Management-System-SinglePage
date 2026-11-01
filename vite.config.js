@@ -7,13 +7,6 @@ import path from "path";
 export default defineConfig({
   server: {
     // port: 3030,
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000", // or 3030 if that's the real port
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
-      },
-    },
   },
   plugins: [react(), tailwindcss()],
   resolve: {

@@ -14,11 +14,13 @@ function Header({ t, isDark, toggleTheme, toggleLanguage, openAgentModal }) {
           <div className="w-12 h-12 bg-sky-500 rounded-lg flex items-center justify-center">
             <Building2 className="w-6 h-6 text-white" />
           </div>
-          <div className="text-xl font-bold text-sky-600  mr-3">Propoly</div>
+          <div className="hidden sm:block text-xl font-bold text-sky-600  mr-3">
+            Propoly
+          </div>
         </div>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-8 rtl:space-x-reverse">
           <a href="#home" className="hover:text-sky-600">
             {t.navHome}
           </a>
@@ -34,10 +36,10 @@ function Header({ t, isDark, toggleTheme, toggleLanguage, openAgentModal }) {
         </nav>
 
         {/* Controls */}
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
+        <div className="flex items-center gap-1 sm:gap-2 lg:gap-4">
           <Button
             variant="outline"
-            className="bg-sky-50"
+            className="bg-sky-50 px-2 sm:px-4"
             onClick={openAgentModal}
           >
             {t.loginAsAgent}
@@ -45,9 +47,10 @@ function Header({ t, isDark, toggleTheme, toggleLanguage, openAgentModal }) {
           <Button
             className="bg-sky-600 hover:bg-sky-700 flex items-center gap-2"
             onClick={handleUserLogin}
+            aria-label={t.downloadMobileApp}
           >
             <Smartphone className="w-4 h-4" />
-            {t.downloadMobileApp}
+            <span className="hidden lg:inline">{t.downloadMobileApp}</span>
           </Button>
           <Button variant="ghost" size="icon" onClick={toggleTheme}>
             {isDark ? (

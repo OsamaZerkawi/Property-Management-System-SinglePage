@@ -76,6 +76,7 @@ import TopOffices from "./features/top_offices/TopOffices";
 import AgentRegistrationModal from "./modals/AgentRegistrationModal";
 import Team from "./components/Team"; 
 import TopProperties from "./features/top_properties/TopProperties";
+import { useNotification } from "./hooks/useNotification";
 
 import "./App.css";
 
@@ -83,6 +84,7 @@ function App() {
   const [isDark, setIsDark] = useState(false);
   const [language, setLanguage] = useState("ar");
   const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
+  const { ToastComponent } = useNotification();
 
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 500], [0, 150]);
@@ -135,6 +137,8 @@ function App() {
         translations={t}
         language={language}
       />
+
+      <ToastComponent />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -8,29 +7,55 @@ import {
 } from "@/components/ui/card.jsx";
 import { Badge } from "@/components/ui/badge.jsx";
 import { Star, MapPin } from "lucide-react";
-import { getPopularOffices } from "../../api/api_repo.jsx";
+import realEstateOffice from "@/assets/real_estate_office_1.jpeg";
+import modernArchitecture from "@/assets/modern_architecture_background.jpg";
+import touristProperty1 from "@/assets/tourist_property_1.jpg";
+import touristProperty2 from "@/assets/tourist_property_2.jpg";
 
 const TopOffices = ({ t }) => {
-  const [offices, setOffices] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadOffices = async () => {
-      try {
-        const data = await getPopularOffices("مكتب");
-        setOffices(data);
-      } catch (err) {
-        setError("Failed to load offices.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadOffices();
-  }, []);
-
-  if (loading) return <p>⏳ Loading top offices...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  // Sample data: this site has no backend
+  const offices = [
+    {
+      id: 1,
+      name: t.office1Name,
+      logo: realEstateOffice,
+      rate: 4.9,
+      type: "realEstate",
+      location: t.damascus,
+    },
+    {
+      id: 2,
+      name: t.office2Name,
+      logo: modernArchitecture,
+      rate: 4.8,
+      type: "realEstate",
+      location: t.aleppo,
+    },
+    {
+      id: 3,
+      name: t.office3Name,
+      logo: touristProperty1,
+      rate: 4.7,
+      type: "tourism",
+      location: t.latakia,
+    },
+    {
+      id: 4,
+      name: t.office4Name,
+      logo: touristProperty2,
+      rate: 4.6,
+      type: "tourism",
+      location: t.tartus,
+    },
+    {
+      id: 5,
+      name: t.office5Name,
+      logo: modernArchitecture,
+      rate: 4.5,
+      type: "realEstate",
+      location: t.homs,
+    },
+  ];
 
   return (
     <section
@@ -75,14 +100,14 @@ const TopOffices = ({ t }) => {
                   <div className="absolute bottom-2 left-2">
                     <Badge
                       className={`text-xs ${
-                        office.type === "عقاري"
-                          ? "bg-[#C3DFED] text-[#1c7d8e]"
-                          : office.type === "سياحي"
+                        office.type === "tourism"
                           ? "bg-[#DCE1FF] text-[#3D468F]"
-                          : "bg-[#FDE2DF] text-[#c32f27]"
+                          : "bg-[#C3DFED] text-[#1c7d8e]"
                       }`}
                     >
-                      {office.type}
+                      {office.type === "tourism"
+                        ? t.typeTourism
+                        : t.typeRealEstate}
                     </Badge>
                   </div>
                 </div>

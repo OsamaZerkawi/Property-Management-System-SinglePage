@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Card,
@@ -8,30 +7,62 @@ import {
 } from "@/components/ui/card.jsx";
 import { Badge } from "@/components/ui/badge.jsx";
 import { Star, MapPin } from "lucide-react";
-import { getPopularProperties } from "../../api/api_repo.jsx";
+import realEstateOffice from "@/assets/real_estate_office_1.jpeg";
+import modernArchitecture from "@/assets/modern_architecture_background.jpg";
+import touristProperty1 from "@/assets/tourist_property_1.jpg";
+import touristProperty2 from "@/assets/tourist_property_2.jpg";
 
 const TopProperties = ({ t }) => {
-  const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadProperties = async () => {
-      try {
-        const data = await getPopularProperties(1, 4, "سياحي");
-        setProperties(data || []);
-      } catch (err) {
-        setError("Failed to load properties.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadProperties();
-  }, []);
-
-  if (loading) return <p>⏳ Loading top properties...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
-  if (!properties.length) return <p>⚠️ No properties available.</p>;
+  // Sample data: this site has no backend
+  const properties = [
+    {
+      propertyId: 1,
+      postImage: touristProperty1,
+      postTitle: t.property1Title,
+      rate: 4.9,
+      type: "tourism",
+      listing_type: t.forRent,
+      location: t.latakia,
+      price: "120",
+      rental_period: t.perNight,
+      postDate: "2026-10-12",
+    },
+    {
+      propertyId: 2,
+      postImage: touristProperty2,
+      postTitle: t.property2Title,
+      rate: 4.8,
+      type: "tourism",
+      listing_type: t.forRent,
+      location: t.tartus,
+      price: "95",
+      rental_period: t.perNight,
+      postDate: "2026-10-05",
+    },
+    {
+      propertyId: 3,
+      postImage: modernArchitecture,
+      postTitle: t.property3Title,
+      rate: 4.7,
+      type: "realEstate",
+      listing_type: t.forSale,
+      location: t.damascus,
+      price: "250,000",
+      postDate: "2026-09-28",
+    },
+    {
+      propertyId: 4,
+      postImage: realEstateOffice,
+      postTitle: t.property4Title,
+      rate: 4.6,
+      type: "realEstate",
+      listing_type: t.forRent,
+      location: t.aleppo,
+      price: "800",
+      rental_period: t.perMonth,
+      postDate: "2026-09-20",
+    },
+  ];
 
   return (
     <section
@@ -89,14 +120,14 @@ const TopProperties = ({ t }) => {
                       <div className="absolute bottom-2 left-2">
                         <Badge
                           className={`text-xs ${
-                            property.type === "عقاري"
-                              ? "bg-[#C3DFED] text-[#1c7d8e]"
-                              : property.type === "سياحي"
+                            property.type === "tourism"
                               ? "bg-[#DCE1FF] text-[#3D468F]"
-                              : "bg-[#FDE2DF] text-[#c32f27]"
+                              : "bg-[#C3DFED] text-[#1c7d8e]"
                           }`}
                         >
-                          {property.type}
+                          {property.type === "tourism"
+                            ? t.typeTourism
+                            : t.typeRealEstate}
                           {property.listing_type &&
                             ` - ${property.listing_type}`}
                         </Badge>

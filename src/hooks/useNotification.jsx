@@ -1,6 +1,23 @@
 import { ToastContainer, toast, Slide } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
+const ToastComponent = () => (
+  <ToastContainer
+    className="select-none"
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={true}
+    closeOnClick={false}
+    rtl={true}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+    transition={Slide}
+  />
+);
+
 export const useNotification = () => {
   const notifyError = (msg) => toast.error(msg);
 
@@ -10,23 +27,6 @@ export const useNotification = () => {
 
   // const notifyWarning = (msg) =>
   //   toast.warn(msg, { style: { fontFamily: "Cairo" } });
-
-  const ToastComponent = () => (
-    <ToastContainer
-      className="select-none"
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={true}
-      closeOnClick={false}
-      rtl={true}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-      transition={Slide}
-    />
-  );
 
   return { notifyError, notifySuccess, notifyWarning, ToastComponent };
 };
