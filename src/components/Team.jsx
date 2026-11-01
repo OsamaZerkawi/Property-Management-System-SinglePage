@@ -59,7 +59,7 @@ function Team({ t }) {
       bio: t.osama.bio,
       image: osama,
       email: "osama@example.com",
-      linkedin: "https://linkedin.com/in/abdullah",
+      linkedin: "https://www.linkedin.com/in/osama-zerkawi-120964387/",
       facebook: "https://www.facebook.com/osama.zerkawi",
     },
   ];
